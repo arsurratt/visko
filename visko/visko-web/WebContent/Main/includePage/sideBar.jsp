@@ -144,8 +144,8 @@
         "<li><a href=\"/visko-web/Main/Home/\">Home</a></li>" +
         "<li class=\"active\"><a href=\"/visko-web/Main/SearchHistory/\">Search History</a></li>" +
         "<li><a href=\"/visko-web/Main/Visualize/\">Visualize</a></li>" +
-        "<li><a href=\"/visko-web/Main/ManageServices\">Manage Services</a></li>" +
-        "<li><a href=\"/visko-web/Main/ConfigureAccount\">Configure Account</a></li>"
+        "<li><a href=\"/visko-web/Main/ManageServices/\">Manage Services</a></li>" +
+        "<li><a href=\"/visko-web/Main/ConfigureAccount/\">Configure Account</a></li>"
       );
     }
     else if( curPage.contains("Visualize") )
@@ -154,8 +154,8 @@
         "<li><a href=\"/visko-web/Main/Home/\">Home</a></li>" +
         "<li><a href=\"/visko-web/Main/SearchHistory/\">Search History</a></li>" +
         "<li class=\"active\"><a href=\"/visko-web/Main/Visualize/\">Visualize</a></li>" +
-        "<li><a href=\"/visko-web/Main/ManageServices\">Manage Services</a></li>" +
-        "<li><a href=\"/visko-web/Main/ConfigureAccount\">Configure Account</a></li>"
+        "<li><a href=\"/visko-web/Main/ManageServices/\">Manage Services</a></li>" +
+        "<li><a href=\"/visko-web/Main/ConfigureAccount/\">Configure Account</a></li>"
       );
     }
     else if( curPage.contains("ManageServices") )
@@ -164,8 +164,8 @@
         "<li><a href=\"/visko-web/Main/Home/\">Home</a></li>" +
         "<li><a href=\"/visko-web/Main/SearchHistory/\">Search History</a></li>" +
         "<li><a href=\"/visko-web/Main/Visualize/\">Visualize</a></li>" +
-        "<li class=\"active\"><a href=\"/visko-web/Main/ManageServices\">Manage Services</a></li>" +
-        "<li><a href=\"/visko-web/Main/ConfigureAccount\">Configure Account</a></li>"
+        "<li class=\"active\"><a href=\"/visko-web/Main/ManageServices/\">Manage Services</a></li>" +
+        "<li><a href=\"/visko-web/Main/ConfigureAccount/\">Configure Account</a></li>"
       );
     }
     else if( curPage.contains("ConfigureAccount") )
@@ -174,8 +174,8 @@
         "<li><a href=\"/visko-web/Main/Home/\">Home</a></li>" +
         "<li><a href=\"/visko-web/Main/SearchHistory/\">Search History</a></li>" +
         "<li><a href=\"/visko-web/Main/Visualize/\">Visualize</a></li>" +
-        "<li><a href=\"/visko-web/Main/ManageServices\">Manage Services</a></li>" +
-        "<li class=\"active\"><a href=\"/visko-web/Main/ConfigureAccount\">Configure Account</a></li>"
+        "<li><a href=\"/visko-web/Main/ManageServices/\">Manage Services</a></li>" +
+        "<li class=\"active\"><a href=\"/visko-web/Main/ConfigureAccount/\">Configure Account</a></li>"
       );
     }
     else
@@ -184,8 +184,8 @@
       "<li class=\"active\"><a href=\"/visko-web/Main/Home/\">Home</a></li>" +
       "<li><a href=\"/visko-web/Main/SearchHistory/\">Search History</a></li>" +
       "<li><a href=\"/visko-web/Main/Visualize/\">Visualize</a></li>" +
-      "<li><a href=\"/visko-web/ManageServices/\">Manage Services</a></li>" +
-      "<li><a href=\"/visko-web/ConfigureAccount/\">Configure Account</a></li>"
+      "<li><a href=\"/visko-web/Main/ManageServices/\">Manage Services</a></li>" +
+      "<li><a href=\"/visko-web/Main/ConfigureAccount/\">Configure Account</a></li>"
     );
     }
   }
