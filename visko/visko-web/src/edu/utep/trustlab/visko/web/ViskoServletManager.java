@@ -71,7 +71,7 @@ public class ViskoServletManager extends HttpServlet {
 		else if( requestType.equalsIgnoreCase("ERIK_TEST") )
 		{
 			request.setAttribute("TEST", "THIS IS FROM THE SERVLET");
-			request.getRequestDispatcher("Main/SelectPipelines.jsp").forward(request, response);
+			request.getRequestDispatcher("Main/Visualize/SelectPipelines.jsp").forward(request, response);
 		}
 		else if( requestType.equalsIgnoreCase("REDIRECT") )
 		{
@@ -85,26 +85,26 @@ public class ViskoServletManager extends HttpServlet {
 		{
 			TreeMap<String, ArrayList<String>> result = new ExecuteQueryServlet().getTreeMap(request, response);
 			request.getSession().setAttribute("resultMap", result);
-			response.sendRedirect("Main/SelectPipelines.jsp");
+			response.sendRedirect("Main/Visualize/SelectPipelines.jsp");
 		}
 		
 		else if( requestType.equalsIgnoreCase("new-build-query") )
 		{	
 			TreeMap<String, ArrayList<String>> result = new ExecuteQueryServlet().getTreeMapBuild(request, response);
 			request.getSession().setAttribute("resultMap", result);
-			response.sendRedirect("Main/SelectPipelines.jsp");
+			response.sendRedirect("Main/Visualize/SelectPipelines.jsp");
 		}		
 		else if( requestType.equalsIgnoreCase("set-query-parameters") )
 		{
 			String abstractionType = request.getParameter("abstractionType");
 			request.getSession().setAttribute("AbstractionType", abstractionType);
-			response.sendRedirect("Main/SetQueryParameters.jsp");
+			response.sendRedirect("Main/Visualize/SetQueryParameters.jsp");
 		}
 		else if( requestType.equalsIgnoreCase("new-edit-parameters") )
 		{
 		//	String query = request.getParameter("abstractionType");
 		//	request.getSession().setAttribute("AbstractionType", abstractionType);
-			response.sendRedirect("Main/EditPipelineParameters.jsp");
+			response.sendRedirect("Main/Visualize/EditPipelineParameters.jsp");
 		}
 		else if(requestType.equalsIgnoreCase("execute-pipeline"))
 			new ExecutePipelineServlet().setRedirection(request, response, this);

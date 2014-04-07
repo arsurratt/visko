@@ -2,41 +2,58 @@
 <%@ page import ="java.sql.*" %>
 
 <%
-	if( request.getParameter("username") != null && request.getParameter("password") != null )
-	{
+	String warning = "";
 
+	if( request.getParameter("email") != null && request.getParameter("password") != null )
+	{
         try
         {
-
-	        Class.forName("com.mysql.jdbc.Driver");
+        	Class.forName("com.mysql.jdbc.Driver");
 	        Connection con = DriverManager.getConnection("jdbc:mysql://earth.cs.utep.edu/cs4311team1sp14","cs4311team1sp14","teamTBA"); 
 
-	        String queryString = "SELECT COUNT(*) FROM User WHERE (email='" + request.getParameter("username") + "' && password='" + request.getParameter("password") + "');";
-
-	        //String queryString = "SELECT COUNT(email) FROM User;";
+	        String queryString = "SELECT email, password, priv FROM User WHERE (email='"+request.getParameter("email")+"' && password='"+request.getParameter("password")+"');";
 
 	        Statement stmt = con.createStatement();
 	       	ResultSet rst = stmt.executeQuery(queryString);
+	        
+	        String e = "";
+	       	String p = "";
+	       	String pr = "";
 
-	        rst.next();
+	        while( rst.next() )
+	        {
+	        	e = rst.getString("email");
+	        	p = rst.getString("password");
+	        	pr = rst.getString("priv");
+	        }
 
-	        if( rst.getInt(1) >= 1 ){
-	        	session.setAttribute("email", request.getParameter("username") );
-				session.setAttribute("pass", request.getParameter("password") );
+
+	        if( !e.equalsIgnoreCase("") && !p.equalsIgnoreCase("") && !pr.equalsIgnoreCase("") )
+	        {
+	        	session.setAttribute("email", e);
+				session.setAttribute("pass", p);
+				session.setAttribute("priv", pr);
 				response.sendRedirect("/visko-web/Main/Home/");
 	        }
-	        else{
-	        	//out.println("<br><br><br><br>NO GOOOD");
+	        else
+	        {
+	        	warning = "<p style='color:red'>Error setting up session.</p>";
 	        }
-			
        	}
        	catch(SQLException s){
-       		out.println("<br><br><br><br>SQ: "+s.getMessage() +"<br><br>");
+       		warning = "<p style='color:red'>Error connecting to SQL Database</p>";
        	}
         catch(Exception e){
-            out.println("<br><br><br><br>Ex: "+e.getMessage() +"<br><br>");
+            warning = "<p style='color:red'>Error</p>";
         }
 	}
+	/* TESTING */
+	/*else{
+		session.setAttribute("email", "priv@gmail.com");
+		session.setAttribute("pass", "123");
+		session.setAttribute("priv", "2");
+		response.sendRedirect("/visko-web/Main/Home/");
+	}*/
 	
 %>
 
@@ -67,19 +84,22 @@
       			<a class='brand'>VisKo: Open Source Visualization Knowledge</a>
       			<div class='nav-collapse collapse'>
         			<ul class='nav pull-right'>
-			        <li><a href='register.jsp'>Register</a></li>
+			        <li><a href='/visko-web/Main/Registration/'>Register</a></li>
 			        <li class='divider-vertical'></li>
 			        <li class='dropdown'>
 			            <a class='dropdown-toggle' href='#' data-toggle='dropdown'>Log In <strong class='caret'></strong></a>
             		<div class='dropdown-menu' style='padding: 15px; padding-bottom: 0px;'>
                 		<form action='index.jsp' method='post'> 
                     		Username:<br /> 
-                    		<input type='text' name='username' value='' /> 
+                    		<input type='text' name='email' value='' /> 
                     		<br /><br /> 
 		                    Password:<br /> 
 		                    <input type='password' name='password' value='' /> 
 		                    <br /><br /> 
-		                    <input type='submit' class='btn btn-info' value='Login' /> 
+		                    <div class="form-inline">
+		                    	<input type='submit' class='btn btn-info' value='Login' /> 
+		                    	<a href="/visko-web/Main/Recover/">forget password?</a>
+		                    </div>
                 		</form> 
             		</div>
           			</li>
@@ -89,15 +109,21 @@
   		</div>
 	</div>
 		
-
-
+	
 
 	<div class="container hero-unit">
+
+		<!-- Warning -->
+	<div class="form-group">
+	  <div class="text-center" for="warning">
+	    <%= warning %>
+	  </div> 
+	</div>
 		<h2>What is VisKo?</h2>
 
 	        <p>VisKo is a framework supporting the answering of visualization queries that allow users to specify what visualizations they want generated rather that specifying how they should be generated.</p>     
 
-	        <p><a class="btn btn-primary btn-lg" href="register.jsp" role="button">Register to get started &raquo;</a></p>
+	        <p><a class="btn btn-primary btn-lg" href="/visko-web/Main/Registration/" role="button">Register to get started &raquo;</a></p>
 	    
 	    <h2>What are the Benefits?</h2>
 	          <p>VisKo can automatically figure out how to generate visualizations given only a query that specifies what visualizations are being requested. Below is a variety of different visualizations generated from a single gravity dataset, resulting from the execution of a single VisKo query.</p>
@@ -105,7 +131,7 @@
 	        </div>
 	   <div class="container">
 	      <div class="col-md-12">	
-		<img src="/visko-web/Main/assets/img/splash_vis.png" class="img-responsive" alt="Responsive image">
+			<img src="/visko-web/Main/assets/img/splash_vis.png" class="img-responsive" alt="Responsive image">
 	      </div>
 	    </ul>
 	</div>
