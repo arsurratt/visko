@@ -76,7 +76,7 @@
                 } 
                 
                 String executeUrl = items[0];
-                String executeProvenanecUrl = items[1];
+                String executeProvenanceUrl = items[1];
                 //modify editParameters url to call new redirect in ViskoServletManager
                 String editParameters = items[2].substring(0, items[2].indexOf("requestType=")+12) + "new-" 
                 					  + items[2].substring(items[0].indexOf("requestType=")+12, items[2].length());
@@ -89,7 +89,7 @@
                 out.println("<td>"+ abstractionType +"</td>");
                 out.println("<td>"+ abstractionFormat +"</td>");
                 out.println("<td><a class=\"btn btn-success\" href=\""+ request.getContextPath()+"\\"+editParameters +"\" role=\"button\">Edit</a></td>");
-                out.println("<td><a class=\"btn btn-success\" href=\""+ request.getContextPath()+"\\"+executeUrl +"\" role=\"button\">Run</a></td>");
+                out.println("<td><a class=\"btn btn-success\" href=\""+ request.getContextPath()+"\\"+executeProvenanceUrl +"\" role=\"button\">Run</a></td>");
                 out.println("</tr>");
               }
               
