@@ -56,7 +56,7 @@
             queryString = "INSERT INTO User(email,password,first,last,org,priv) VALUES (?, ?, ?, ?, ?,?);";
 
             pstatement = con.prepareStatement(queryString);
-            pstatement.setString(1, email);
+            pstatement.setString(1, email.toLowerCase());
             pstatement.setString(2, password);
             pstatement.setString(3, first);
             pstatement.setString(4, last);
@@ -81,9 +81,6 @@
           warning = "<p style='color:red'>Error</p>";
         }
     }
-
-
-
 %>
 
 
@@ -104,7 +101,60 @@
     <title>Register</title>
 
     <!-- Bootstrap core CSS -->
-<link href="/visko-web/Main/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/visko-web/Main/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <%@ include file="../includePage/footer.jsp" %>
+
+    <style type="text/css">
+      .orange {
+        color: orange;
+      }
+
+      .green {
+          color: green;
+      }
+
+      .red {
+          color: red;
+      }
+    </style>
+
+    <script>
+      $( document ).ready(function() {
+        $('#emailFail').hide();
+        $('#emailPass').hide();
+        
+        // Your code here.
+        $('#email').on('click mouseenter mouseleave keypress paste', function () {
+          setTimeout(function(){ 
+            var email = $('#email').val();
+            var check = $('#emailCheck').val();
+            var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+            if (re.test(email)) 
+            { //valid email 
+              if( email == check )
+              {
+                $('#emailFail').hide();
+                $('#emailPass').show();
+                $('#emailWarn').hide();
+              }
+              else
+              {
+                $('#emailFail').hide();
+                $('#emailPass').hide();
+                $('#emailWarn').show();
+              }
+            } 
+            else {
+              $('#emailFail').show();
+              $('#emailPass').hide();
+              $('#emailWarn').hide();
+            }
+          },0);
+        });
+      }); 
+    </script>
+
 
   </head>
 
@@ -150,11 +200,13 @@
 </div>
 
 <!-- Text input-->
-<div class="form-group">
+<div class="form-group form-inline">
   <label class="col-md-4 control-label" for="email">Email</label>  
   <div class="col-md-4">
-  <input id="email" name="email" type="text" placeholder="example@visko.com" class="form-control input-md" required="">
-    
+    <input id="email" name="email" type="text" placeholder="example@visko.com" class="form-control input-md" required="">
+    <div id="emailFail" class="glyphicon glyphicon-ok red"></div>
+    <div id="emailPass" class="glyphicon glyphicon-ok green"></div>
+    <div id="emailWarn" class="glyphicon glyphicon-ok orange"></div> 
   </div>
 </div>
 
@@ -237,5 +289,7 @@
 </div>
 </div>
 </div>
+
+
 </body>
 </html>
