@@ -74,4 +74,61 @@ public class ParameterBindingsHTML {
 		html += "</ol>";
 		return html;
 	}
+	
+	public static String newGetParameterBindingsList(Pipeline pipe) {
+
+		HashMap<String, String> bindings = pipe.getParameterBindings();
+		
+		String html = "<div class=\"panel-group\" id=\"accordion\">";
+		
+		for(int i = 0; i < pipe.size(); i ++){
+			
+			Service viskoService = pipe.getService(i);
+			OWLSService service = viskoService.getOWLSService();
+			String uri = service.getURI();
+			String name = viskoService.getLabel();
+			String id = name.replaceAll("\\s+","");
+			
+			html += "<div class=\"panel panel-default\">" +
+	                "<div class=\"panel-heading\">" +
+	                "<h4 data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#" +id +"\" class=\"panel-title\">";  
+			html += "<b>Service Name:</b> <a href=\"" + uri + "\">" + name + "</a>";
+			html += "</h4>" +
+	                "</div>" +
+	                "<div id=\""+ id +"\" class=\"panel-collapse collapse in\">" +
+	                "<div class=\"panel-body\">";
+			html += "<ul>";
+			html += "<li><b>Supporting Toolkit:</b> <a href=\"" + viskoService.getSupportingToolkit().getURI() + "\">" + viskoService.getSupportingToolkit().getLabel() + "</a></li>";
+			html += "</ul>";
+			
+			OWLIndividualList<Input> paramList = service.getIndividual().getProfile().getInputs();
+			String parameterURI;
+			String parameterValue;
+			if ((paramList.size() - 1) > 0) {
+				html += "<table>";
+				for (Input inputParameter : paramList) {
+					parameterURI = inputParameter.getURI().toASCIIString();
+					parameterValue = bindings.get(parameterURI);
+					
+					if (!parameterURI.contains("url") && !parameterURI.contains("datasetURL")) {
+						if(parameterValue == null)
+							html += "<tr><td><a href=\"" + parameterURI + "\">" + PipelineHTML.getURIFragment(parameterURI) + " </a></td><td><b>=</b> <input style=\"width: 200px\" name=\"" + parameterURI + "\" /></td></tr>";
+						else
+							html += "<tr><td><a href=\"" + parameterURI + "\">" + PipelineHTML.getURIFragment(parameterURI) + " </a></td><td><b>=</b> <input style=\"width: 200px\" value=\"" + parameterValue + "\" name=\"" + parameterURI + "\" /></td></tr>";
+					}
+				}				
+				html += "</table>";
+				
+			}
+			else
+				html += "<b>No Parameters associated with service.</b>";
+			
+			
+			html += "</div>" +
+	                "</div>" +
+	                "</div>";
+		}
+		
+		return html;
+	}
 }

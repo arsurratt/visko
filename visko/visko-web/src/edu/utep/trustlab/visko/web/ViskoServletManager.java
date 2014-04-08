@@ -102,8 +102,8 @@ public class ViskoServletManager extends HttpServlet {
 		}
 		else if( requestType.equalsIgnoreCase("new-edit-parameters") )
 		{
-		//	String query = request.getParameter("abstractionType");
-		//	request.getSession().setAttribute("AbstractionType", abstractionType);
+			String EditParametersForm = new EditParametersServlet().getEditParametersForm(request);
+			request.getSession().setAttribute("EditParametersForm", EditParametersForm);
 			response.sendRedirect("Main/Visualize/EditPipelineParameters.jsp");
 		}
 		else if(requestType.equalsIgnoreCase("execute-pipeline"))

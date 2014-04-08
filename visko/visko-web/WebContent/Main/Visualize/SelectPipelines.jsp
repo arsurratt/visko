@@ -73,13 +73,23 @@
                 {
                   items[count] = st.nextToken();
                   count++;
-                }       
+                } 
+                
+                String executeUrl = items[0];
+                String executeProvenanecUrl = items[1];
+                //modify editParameters url to call new redirect in ViskoServletManager
+                String editParameters = items[2].substring(0, items[2].indexOf("requestType=")+12) + "new-" 
+                					  + items[2].substring(items[0].indexOf("requestType=")+12, items[2].length());
+                String abstractionType = items[3];
+                String abstractionFormat = items[4];
+                String abstractionDescription = items[5];
+                
                 out.println("<tr>");
                 out.println("<td>"+ i +"</td>");
-                out.println("<td>"+ items[3] +"</td>");
-                out.println("<td>"+ items[4] +"</td>");
-                out.println("<td><a class=\"btn btn-success\" href=\""+ request.getContextPath()+"\\"+items[2] +"\" role=\"button\">Edit</a></td>");
-                out.println("<td><a class=\"btn btn-success\" href=\""+ request.getContextPath()+"\\"+items[0] +"\" role=\"button\">Run</a></td>");
+                out.println("<td>"+ abstractionType +"</td>");
+                out.println("<td>"+ abstractionFormat +"</td>");
+                out.println("<td><a class=\"btn btn-success\" href=\""+ request.getContextPath()+"\\"+editParameters +"\" role=\"button\">Edit</a></td>");
+                out.println("<td><a class=\"btn btn-success\" href=\""+ request.getContextPath()+"\\"+executeUrl +"\" role=\"button\">Run</a></td>");
                 out.println("</tr>");
               }
               

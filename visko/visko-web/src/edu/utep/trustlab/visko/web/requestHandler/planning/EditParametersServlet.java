@@ -45,4 +45,21 @@ public class EditParametersServlet extends RequestHandlerHTML{
 		html = "<form action=\"ViskoServletManager\"><input type=\"hidden\" name=\"use-bindings-in-url\" value=\"true\" /><input type=\"hidden\" name=\"index\" value=\"" + index + "\" /><input type=\"hidden\" name=\"requestType\" value=\"check-bindings\" />" + paramsList + "<input name\"Execute Pipeline\" type=\"submit\" id=\"submitButton\" style=\"width: 156px\"></form>";
 		return html;
 	}
+	
+	public String getEditParametersForm(HttpServletRequest request){
+
+		String stringIndex = request.getParameter("index");
+		int index = Integer.valueOf(stringIndex);
+
+		ViskoWebSession session = (ViskoWebSession) request.getSession().getAttribute(ViskoWebSession.SESSION_ID);
+		QueryEngine engine = session.getQueryEngine();
+
+		Pipeline pipe = engine.getPipelines().get(index);
+
+		String html = "<h2>Edit Parameter Values</h2>";
+		String paramsList = ParameterBindingsHTML.newGetParameterBindingsList(pipe);
+		
+		html = "<form action=\"/visko-web/ViskoServletManager\"><input type=\"hidden\" name=\"use-bindings-in-url\" value=\"true\" /><input type=\"hidden\" name=\"index\" value=\"" + index + "\" /><input type=\"hidden\" name=\"requestType\" value=\"check-bindings\" />" + paramsList + "<input name\"Execute Pipeline\" type=\"submit\" id=\"submitButton\" style=\"width: 156px\"></form>";
+		return html;
+	}
 }
