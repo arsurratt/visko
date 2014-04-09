@@ -106,6 +106,13 @@ public class ViskoServletManager extends HttpServlet {
 			request.getSession().setAttribute("EditParametersForm", EditParametersForm);
 			response.sendRedirect("Main/Visualize/EditPipelineParameters.jsp");
 		}
+		else if( requestType.equalsIgnoreCase("new-execute-pipeline") )
+		{
+			new ExecutePipelineServlet().newExecutePipeline(request, response, this);
+			//String EditParametersForm = new EditParametersServlet().getEditParametersForm(request);
+			//request.getSession().setAttribute("EditParametersForm", EditParametersForm);
+			//response.sendRedirect("Main/Visualize/EditPipelineParameters.jsp");
+		}
 		else if(requestType.equalsIgnoreCase("execute-pipeline"))
 			new ExecutePipelineServlet().setRedirection(request, response, this);
 		else if(requestType.equalsIgnoreCase("execute-query-service"))

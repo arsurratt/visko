@@ -76,10 +76,11 @@
                 } 
                 
                 String executeUrl = items[0];
-                String executeProvenanceUrl = items[1];
+                String executeProvenanceUrl = items[1].substring(0, items[1].indexOf("requestType=")+12) + "new-" 
+  					  + items[1].substring(items[1].indexOf("requestType=")+12, items[1].length());
                 //modify editParameters url to call new redirect in ViskoServletManager
                 String editParameters = items[2].substring(0, items[2].indexOf("requestType=")+12) + "new-" 
-                					  + items[2].substring(items[0].indexOf("requestType=")+12, items[2].length());
+                					  + items[2].substring(items[2].indexOf("requestType=")+12, items[2].length());
                 String abstractionType = items[3];
                 String abstractionFormat = items[4];
                 String abstractionDescription = items[5];

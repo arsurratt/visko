@@ -35,9 +35,55 @@ import edu.utep.trustlab.visko.web.requestHandler.RequestHandlerRedirect;
 
 public class ExecutePipelineServlet extends RequestHandlerRedirect {
 	
-	public static final String JSP_PAGE = "/ExecutePipelineStatus.jsp";
+	public static final String JSP_PAGE = "/Main/Visualize/ExecutePipelineStatus.jsp";
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response, HttpServlet servlet) throws IOException, ServletException {
+		String provenance = request.getParameter("provenance");
+		String stringIndex = request.getParameter("index");
+
+		boolean captureProvenance = false;
+		if(provenance != null)
+			captureProvenance = true;
+		
+		ViskoWebSession session = (ViskoWebSession) request.getSession().getAttribute(ViskoWebSession.SESSION_ID);
+		ExecutePipelineStatusBean statusBean;
+				
+		if(!session.hasPipelineExecutor()){
+			int index = Integer.valueOf(stringIndex);
+			
+			System.out.println("Kicking off new pipeline executor...");
+			QueryEngine engine = session.getQueryEngine();
+			Pipeline pipe = engine.getPipelines().get(index);
+						
+			PipelineExecutorJob job = new PipelineExecutorJob(pipe);
+			job.setProvenanceLogging(captureProvenance);
+			
+			PipelineExecutor runningPipeline = new PipelineExecutor();
+			runningPipeline.setJob(job);
+			
+			//add the running pipeline to the session object
+			session.setPipelineExecutor(runningPipeline);
+			runningPipeline.process();
+			
+			System.out.println("Redirecting to self...");
+			if(captureProvenance)
+				response.sendRedirect("ViskoServletManager?provenance=true&requestType=execute-pipeline&index=" + index);
+			else
+				response.sendRedirect("ViskoServletManager?provenance=true&requestType=execute-pipeline&index=" + index);
+		}	
+		else{		
+	        statusBean = new ExecutePipelineStatusBean(session.getPipelineExecutor().getJob());
+	        
+	        if(!session.getPipelineExecutor().isAlive() || session.getPipelineExecutor().getJob().getJobStatus().isJobCompleted()){
+	        	session.removePipelineExecutor();
+	        }
+	        
+	        request.setAttribute("statusBean", statusBean);
+	        forward(JSP_PAGE, request, response, servlet);
+		}		
+	}
+	
+	public void newExecutePipeline (HttpServletRequest request, HttpServletResponse response, HttpServlet servlet) throws IOException, ServletException {
 		String provenance = request.getParameter("provenance");
 		String stringIndex = request.getParameter("index");
 
