@@ -1,18 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"
-	import="edu.utep.trustlab.visko.web.html.Template" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-${statusBean.refreshTag}
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="visko-style.css" />
-<title>Pipeline Execution</title>
-</head>
-<body>
+	${statusBean.refreshTag}
+	
+    <title>Visko</title>
 
-<div id="container">
+    <%@ include file="../includePage/header.jsp" %>
 
-<%= Template.getHeader() %>
+        <!-- Bootstrap core CSS -->
+    <link href="/visko-web/Main/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/visko-web/Main/assets/css/sideBar.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <%@ page import="java.util.*" %>     
+    <%@ include file="../includePage/sideBar.jsp" %>
+
+    <div class="col-md-10 col-md-offset-2">
+      <div class="container">
+        <div class="row">
+
+        <!-- PAGE INFORMAITON GOES HERE -->
 
 <div id="content">
 
@@ -22,9 +33,12 @@ ${statusBean.message}
 <br />
 ${statusBean.cancelButton}
 </div>
-</div>
 
-<%= Template.getFooter() %>
+		<!-- PAGE INFORMAITON GOES ABOVE -->
+        </div>      
+      </div>
+    </div>
 
-</body>
+    <%@ include file="../includePage/footer.jsp" %>
+  </body>
 </html>
