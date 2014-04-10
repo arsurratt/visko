@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
+	${statusBean.refreshTag}
+	
     <title>Visko</title>
 
     <%@ include file="../includePage/header.jsp" %>
@@ -14,24 +16,25 @@
 
   <body>
 
-    <%@ page import="java.util.*" %>
+    <%@ page import="java.util.*" %>     
     <%@ include file="../includePage/sideBar.jsp" %>
 
     <div class="col-md-10 col-md-offset-2">
       <div class="container">
         <div class="row">
 
-<!-- PAGE INFORMAITON GOES HERE -->
-        
-	<%  
-		String EditParametersForm = (String) request.getSession().getAttribute("EditParametersForm");
-		out.println("<br>" + 
-					EditParametersForm + 
-					"<br><a class=\"btn btn-warning\" href=\"/visko-web/Main/Visualize/SelectPipelines.jsp\" style=\"width: 156px\">Back</a>");
-	%>
+        <!-- PAGE INFORMAITON GOES HERE -->
 
-<!-- PAGE INFORMAITON GOES ABOVE -->
-           
+<div id="content">
+
+<h3 style="padding:0px">[VisKo Pipeline Execution]</h3>
+${statusBean.message}
+<br />
+<br />
+${statusBean.cancelButton}
+</div>
+
+		<!-- PAGE INFORMAITON GOES ABOVE -->
         </div>      
       </div>
     </div>

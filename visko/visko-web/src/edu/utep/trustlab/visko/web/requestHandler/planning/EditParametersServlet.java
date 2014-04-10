@@ -42,7 +42,7 @@ public class EditParametersServlet extends RequestHandlerHTML{
 		String html = "<h2>Edit Parameter Values</h2>";
 		String paramsList = ParameterBindingsHTML.getParameterBindingsList(pipe);
 		
-		html = "<form action=\"ViskoServletManager\"><input type=\"hidden\" name=\"use-bindings-in-url\" value=\"true\" /><input type=\"hidden\" name=\"index\" value=\"" + index + "\" /><input type=\"hidden\" name=\"requestType\" value=\"check-bindings\" />" + paramsList + "<input name\"Execute Pipeline\" type=\"submit\" id=\"submitButton\" style=\"width: 156px\"></form>";
+		html = "<form action=\"ViskoServletManager\"><input type=\"hidden\" name=\"use-bindings-in-url\" value=\"true\" /><input type=\"hidden\" name=\"index\" value=\"" + index + "\" /><input type=\"hidden\" name=\"requestType\" value=\"check-bindings\" />" + paramsList + "<input name=\"Execute Pipeline\" type=\"submit\" id=\"submitButton\" style=\"width: 156px\"></form>";
 		return html;
 	}
 	
@@ -59,7 +59,7 @@ public class EditParametersServlet extends RequestHandlerHTML{
 		String html = "<h2>Edit Parameter Values</h2>";
 		String paramsList = ParameterBindingsHTML.newGetParameterBindingsList(pipe);
 		
-		html = "<form action=\"/visko-web/ViskoServletManager\"><input type=\"hidden\" name=\"use-bindings-in-url\" value=\"true\" /><input type=\"hidden\" name=\"index\" value=\"" + index + "\" /><input type=\"hidden\" name=\"requestType\" value=\"check-bindings\" />" + paramsList + "<input name\"Execute Pipeline\" type=\"submit\" id=\"submitButton\" style=\"width: 156px\"></form>";
+		html = "<form action=\"/visko-web/ViskoServletManager\"><input type=\"hidden\" name=\"use-bindings-in-url\" value=\"true\" /><input type=\"hidden\" name=\"index\" value=\"" + index + "\" /><input type=\"hidden\" name=\"requestType\" value=\"check-bindings\" />" + paramsList + "<br><input name=\"Execute Pipeline\" class=\"btn btn-info\" type=\"submit\" id=\"submitButton\" style=\"width: 156px\"></form>";
 		return html;
 	}
 }
