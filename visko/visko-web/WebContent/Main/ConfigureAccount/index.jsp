@@ -13,7 +13,8 @@
 
   String nEmail = request.getParameter("newEmail");
   String nPass = request.getParameter("newPass");
-
+  
+  nEmail = nEmail.toLowerCase();
 
   try
   {
