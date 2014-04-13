@@ -14,7 +14,6 @@
   String nEmail = request.getParameter("newEmail");
   String nPass = request.getParameter("newPass");
   
-  nEmail = nEmail.toLowerCase();
 
   try
   {
@@ -25,6 +24,7 @@
 
     if( cEmail && cPass )
     {
+    	nEmail = nEmail.toLowerCase();
       //need to check if new email is already being used
 
       Statement st1 = con.createStatement();
@@ -40,7 +40,8 @@
     }
     else if ( cEmail && !cPass ) //Change email only
     {
-
+	
+    	nEmail = nEmail.toLowerCase();
       //need to check if new email is already being used
 
       Statement st1 = con.createStatement();
