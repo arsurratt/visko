@@ -37,14 +37,14 @@
 	        }
 	        else
 	        {
-	        	warning = "<p style='color:red'>Error setting up session.</p>";
+	        	warning = "<p style='color:red'>Invalid Login.</p>";
 	        }
        	}
        	catch(SQLException s){
-       		warning = "<p style='color:red'>Error connecting to SQL Database</p>";
+       		warning = "<p style='color:red'>Error connecting to SQL Database: "+ s.getMessage() + "</p>";
        	}
         catch(Exception e){
-            warning = "<p style='color:red'>Error</p>";
+            warning = "<p style='color:red'>Error: " + e.getMessage() + "</p>";
         }
 	}
 	/* TESTING */
