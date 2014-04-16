@@ -33,7 +33,7 @@
 				          "<form action='/visko-web/Main/logOut.jsp' class=\"navbar-form navbar-right\" role=\"form\"> "+
 					    "<button type=\"submit\" class=\"btn btn-success\">Logout</button>"+
 					  "</form>" +
-					  "<p class=\"navbar-text navbar-right\">Welcome <a href=\"/visko-web/Main/Account/\" class=\"navbar-link\">" + session.getAttribute("email") +"</a></p>" +
+					  "<p class=\"navbar-text navbar-right\">Welcome <a href=\"/visko-web/Main/ConfigureAccount/\" class=\"navbar-link\">" + session.getAttribute("email") +"</a></p>" +
 				        "</div>"+
 				      "</div>"+
 				    "</div>"
