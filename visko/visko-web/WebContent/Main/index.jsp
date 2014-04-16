@@ -96,9 +96,9 @@
 		                    Password:<br /> 
 		                    <input type='password' name='password' value='' /> 
 		                    <br /><br /> 
-		                    <div class="form-inline">
-		                    	<input type='submit' class='btn btn-info' value='Login' /> 
-		                    	<a href="/visko-web/Main/Recover/">forget password?</a>
+		                    <div class="form-inline text-center">
+		                		<input type='submit' class='btn btn-info' value='Login' /> 
+		                    	<a href="/visko-web/Main/Recover/">forgot password?</a>
 		                    </div>
                 		</form> 
             		</div>
